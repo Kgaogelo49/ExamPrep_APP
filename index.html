@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CertMaster - AI Exam Prep</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header>
+            <h1>CertMaster</h1>
+            <p>Master your certification with AI-generated practice questions.</p>
+        </header>
+
+        <!-- Start Screen -->
+        <main id="start-screen" class="active-screen">
+            <div class="card">
+                <h2>Choose Your Certification</h2>
+                <div class="input-group">
+                    <input type="text" id="cert-input" placeholder="e.g. AWS Solutions Architect, PMP, CISSP" autocomplete="off">
+                    <button id="generate-btn">Start Quiz</button>
+                </div>
+                <div id="loading" class="hidden">
+                    <div class="spinner"></div>
+                    <p>Generating questions...</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Quiz Screen -->
+        <main id="quiz-screen" class="hidden">
+            <div class="card">
+                <div class="quiz-header">
+                    <span id="question-tracker">Question 1/10</span>
+                    <span id="timer">Time: 00:00</span>
+                </div>
+                
+                <h3 id="question-text">Question goes here?</h3>
+                
+                <div id="options-container" class="options-list">
+                    <!-- Options injected by JS -->
+                </div>
+
+                <div class="quiz-footer">
+                    <button id="next-btn" class="hidden">Next Question</button>
+                    <button id="finish-btn" class="hidden">See Results</button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Results Screen -->
+        <main id="result-screen" class="hidden">
+            <div class="card result-card">
+                <h2>Quiz Complete!</h2>
+                <div class="score-display">
+                    <span id="score-value">80</span>
+                    <span class="score-label">%</span>
+                </div>
+                <p id="result-message">Great job! You passed.</p>
+                <div class="result-actions">
+                    <button id="restart-btn">Take Another Quiz</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,239 @@
+/* Clean Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-blue: #1976D2;
+    --primary-orange: #FF6F00;
+    --white: #FFFFFF;
+    --text-dark: #333333;
+    --text-light: #666666;
+    --bg-gradient-start: #1976D2;
+    --bg-gradient-end: #FF6F00;
+    --card-bg: rgba(255, 255, 255, 0.95);
+    --font-family: 'Inter', sans-serif;
+}
+
+body {
+    font-family: var(--font-family);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-dark);
+    /* Animated Gradient Background */
+    background: linear-gradient(-45deg, #1976D2, #FF6F00, #2196F3, #FF8F00);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.app-container {
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    color: var(--white);
+    margin-bottom: 2rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* Glassy Card Style */
+.card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Start Screen */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+input {
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.3s;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+}
+
+button {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+    font-family: inherit;
+}
+
+#generate-btn {
+    background-color: var(--primary-orange);
+    color: var(--white);
+}
+
+#generate-btn:hover {
+    background-color: #e65100;
+    transform: translateY(-2px);
+}
+
+/* Loading State */
+#loading {
+    margin-top: 20px;
+    text-align: center;
+    color: var(--primary-blue);
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid var(--primary-blue);
+    border-radius: 50%;
+    margin: 0 auto 10px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Quiz Screen */
+.quiz-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+#question-text {
+    font-size: 1.3rem;
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+.options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.option-btn {
+    text-align: left;
+    background: #f5f5f5;
+    color: var(--text-dark);
+    padding: 15px 20px;
+}
+
+.option-btn:hover {
+    background: #e3f2fd;
+    color: var(--primary-blue);
+}
+
+.option-btn.selected {
+    background: var(--primary-blue);
+    color: var(--white);
+}
+
+.option-btn.correct {
+    background: #4CAF50; /* Success green */
+    color: white;
+}
+
+.option-btn.incorrect {
+    background: #FF5252; /* Error red */
+    color: white;
+}
+
+.quiz-footer {
+    margin-top: 25px;
+    text-align: right;
+}
+
+#next-btn, #finish-btn {
+    background-color: var(--primary-blue);
+    color: white;
+}
+
+/* Results Screen */
+.result-card {
+    text-align: center;
+}
+
+.score-display {
+    margin: 30px 0;
+    font-size: 4rem;
+    font-weight: 800;
+    color: var(--primary-blue);
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+}
+
+.score-label {
+    font-size: 2rem;
+    margin-left: 5px;
+    color: var(--text-light);
+}
+
+#restart-btn {
+    background-color: var(--primary-orange);
+    color: white;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 480px) {
+    .card {
+        padding: 1.5rem;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    .score-display {
+        font-size: 3rem;
+    }
+}
