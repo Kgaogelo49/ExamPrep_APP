@@ -387,3 +387,67 @@ button:hover {
         font-size: 3rem;
     }
 }
+
+/* Navigation */
+.top-nav {
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 10px;
+}
+
+.nav-link {
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    transition: background 0.3s ease;
+}
+
+.nav-link:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+/* About Page Styles */
+.divider {
+    border: 0;
+    height: 1px;
+    background: #e0e0e0;
+    margin: 30px 0;
+}
+
+.feature-list {
+    list-style-type: none;
+    margin: 20px 0;
+}
+
+.feature-list li {
+    padding: 10px 0;
+    padding-left: 25px;
+    position: relative;
+}
+
+.feature-list li::before {
+    content: "✓";
+    color: var(--primary-orange);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+
+.tech-stack {
+    background: #f5f5f5;
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 4px solid var(--primary-blue);
+    margin-top: 20px;
+}
+
+.closing {
+    margin-top: 30px;
+    text-align: center;
+    font-weight: 600;
+    color: var(--primary-blue);
+}
