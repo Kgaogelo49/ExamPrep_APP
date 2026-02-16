@@ -4,8 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentQuestionIndex = 0;
     let score = 0;
     let selectedOptionIndex = null;
-    let quizTimer = null;
-    let secondsElapsed = 0;
 
     // DOM Elements
     const screens = {
@@ -19,7 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
         generateBtn: document.getElementById('generate-btn'),
         loading: document.getElementById('loading'),
         questionTracker: document.getElementById('question-tracker'),
-        timerDisplay: document.getElementById('timer'),
         questionText: document.getElementById('question-text'),
         optionsContainer: document.getElementById('options-container'),
         nextBtn: document.getElementById('next-btn'),
@@ -66,15 +63,20 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         ];
 
-        // Generate 5 questions (duplicating templates if needed for demo)
-        return templates.map((t, i) => {
-            return {
+        // Generate 30 questions by looping through templates
+        const totalQuestions = 30;
+        const questions = [];
+
+        for (let i = 0; i < totalQuestions; i++) {
+            const t = templates[i % templates.length]; // Cycle through templates
+            questions.push({
                 id: i,
-                question: t.q.replace(/\$\{topic\}/g, topic || "Certification"),
+                question: t.q.replace(/\$\{topic\}/g, topic || "Certification") + (Math.floor(i / templates.length) > 0 ? ` (Variant ${Math.floor(i / templates.length) + 1})` : ""),
                 options: t.options, // In a real app, shuffle these
                 correctAnswer: t.correct
-            };
-        });
+            });
+        }
+        return questions;
     }
 
     // Event: Start Quiz
@@ -101,25 +103,13 @@ document.addEventListener('DOMContentLoaded', () => {
     function startQuiz() {
         currentQuestionIndex = 0;
         score = 0;
-        secondsElapsed = 0;
         showScreen('quiz');
-        startTimer();
         renderQuestion();
-    }
-
-    function startTimer() {
-        clearInterval(quizTimer);
-        quizTimer = setInterval(() => {
-            secondsElapsed++;
-            const mins = Math.floor(secondsElapsed / 60).toString().padStart(2, '0');
-            const secs = (secondsElapsed % 60).toString().padStart(2, '0');
-            elements.timerDisplay.textContent = `Time: ${mins}:${secs}`;
-        }, 1000);
     }
 
     function renderQuestion() {
         const question = currentQuestions[currentQuestionIndex];
-        
+
         // Update Tracker
         elements.questionTracker.textContent = `Question ${currentQuestionIndex + 1}/${currentQuestions.length}`;
         elements.questionText.textContent = question.question;
@@ -141,13 +131,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function selectOption(index, btnElement) {
-        // Prevent changing answer after selection (optional rule, can be changed)
-        if (selectedOptionIndex !== null) return; 
+        // Prevent changing answer after selection
+        if (selectedOptionIndex !== null) return;
 
         selectedOptionIndex = index;
         const currentQuestion = currentQuestions[currentQuestionIndex];
 
-        // Visual Feedback
+        // Visual Feedback (Immediate)
         if (index === currentQuestion.correctAnswer) {
             btnElement.classList.add('correct');
             score++;
@@ -173,7 +163,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Event: Finish Quiz
     elements.finishBtn.addEventListener('click', () => {
-        clearInterval(quizTimer);
         showResults();
     });
 
