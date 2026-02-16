@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <div class="app-container">
         <!-- Header -->
@@ -23,7 +25,8 @@
             <div class="card">
                 <h2>Choose Your Certification</h2>
                 <div class="input-group">
-                    <input type="text" id="cert-input" placeholder="e.g. AWS Solutions Architect, PMP, CISSP" autocomplete="off">
+                    <input type="text" id="cert-input" placeholder="e.g. AWS Solutions Architect, PMP, CISSP"
+                        autocomplete="off">
                     <button id="generate-btn">Start Quiz</button>
                 </div>
                 <div id="loading" class="hidden">
@@ -37,12 +40,11 @@
         <main id="quiz-screen" class="hidden">
             <div class="card">
                 <div class="quiz-header">
-                    <span id="question-tracker">Question 1/10</span>
-                    <span id="timer">Time: 00:00</span>
+                    <span id="question-tracker">Question 1/30</span>
                 </div>
-                
+
                 <h3 id="question-text">Question goes here?</h3>
-                
+
                 <div id="options-container" class="options-list">
                     <!-- Options injected by JS -->
                 </div>
@@ -68,8 +70,13 @@
                 </div>
             </div>
         </main>
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p>Made by <strong>Kgaogelo Phooko</strong>, Data Intern</p>
+        </footer>
     </div>
 
     <script src="script.js"></script>
 </body>
+
 </html>

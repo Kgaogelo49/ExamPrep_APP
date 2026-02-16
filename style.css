@@ -31,9 +31,17 @@ body {
 }
 
 @keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 .app-container {
@@ -46,7 +54,7 @@ header {
     text-align: center;
     color: var(--white);
     margin-bottom: 2rem;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 header h1 {
@@ -65,7 +73,7 @@ header p {
     background: var(--card-bg);
     border-radius: 20px;
     padding: 2.5rem;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(10px);
     transition: transform 0.3s ease;
 }
@@ -135,8 +143,13 @@ button {
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 /* Quiz Screen */
@@ -178,12 +191,14 @@ button {
 }
 
 .option-btn.correct {
-    background: #4CAF50; /* Success green */
+    background: #4CAF50;
+    /* Success green */
     color: white;
 }
 
 .option-btn.incorrect {
-    background: #FF5252; /* Error red */
+    background: #FF5252;
+    /* Error red */
     color: white;
 }
 
@@ -192,7 +207,8 @@ button {
     text-align: right;
 }
 
-#next-btn, #finish-btn {
+#next-btn,
+#finish-btn {
     background-color: var(--primary-blue);
     color: white;
 }
@@ -232,8 +248,22 @@ button {
     header h1 {
         font-size: 2rem;
     }
-    
+
     .score-display {
         font-size: 3rem;
     }
+}
+
+/* Footer */
+.app-footer {
+    text-align: center;
+    margin-top: 30px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+    padding-bottom: 20px;
+}
+
+.app-footer strong {
+    font-weight: 600;
+    color: var(--white);
 }
