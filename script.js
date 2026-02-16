@@ -17,14 +17,21 @@ document.addEventListener('DOMContentLoaded', () => {
         generateBtn: document.getElementById('generate-btn'),
         loading: document.getElementById('loading'),
         questionTracker: document.getElementById('question-tracker'),
+        scoreTracker: document.getElementById('score-tracker'),
+        progressBar: document.getElementById('progress-bar'),
+        quizCard: document.getElementById('quiz-card'), // For shake animation
         questionText: document.getElementById('question-text'),
         optionsContainer: document.getElementById('options-container'),
         nextBtn: document.getElementById('next-btn'),
         finishBtn: document.getElementById('finish-btn'),
         scoreValue: document.getElementById('score-value'),
         resultMessage: document.getElementById('result-message'),
-        restartBtn: document.getElementById('restart-btn')
+        restartBtn: document.getElementById('restart-btn'),
+        activityGraph: document.getElementById('activity-graph')
     };
+
+    // Initialize Analytics
+    updateAnalyticsDisplay();
 
     // Helper: Switch Screens
     function showScreen(screenName) {
@@ -110,14 +117,21 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderQuestion() {
         const question = currentQuestions[currentQuestionIndex];
 
-        // Update Tracker
+        // Update Tracker & Score
         elements.questionTracker.textContent = `Question ${currentQuestionIndex + 1}/${currentQuestions.length}`;
+        elements.scoreTracker.textContent = `Score: ${score}`;
+
+        // Update Progress Bar
+        const progressPercent = ((currentQuestionIndex) / currentQuestions.length) * 100;
+        elements.progressBar.style.width = `${progressPercent}%`;
+
         elements.questionText.textContent = question.question;
 
         // Reset UI
         elements.optionsContainer.innerHTML = '';
         elements.nextBtn.classList.add('hidden');
         elements.finishBtn.classList.add('hidden');
+        elements.quizCard.classList.remove('shake'); // Remove shake class
         selectedOptionIndex = null;
 
         // Render Options
@@ -141,11 +155,18 @@ document.addEventListener('DOMContentLoaded', () => {
         if (index === currentQuestion.correctAnswer) {
             btnElement.classList.add('correct');
             score++;
+            // Update Score Display immediately
+            elements.scoreTracker.textContent = `Score: ${score}`;
         } else {
             btnElement.classList.add('incorrect');
             // Show correct answer
             elements.optionsContainer.children[currentQuestion.correctAnswer].classList.add('correct');
+            // Trigger Shake Animation
+            elements.quizCard.classList.add('shake');
         }
+
+        // Log Activity to Analytics (1 question answered)
+        logActivity();
 
         // Show Next/Finish button
         if (currentQuestionIndex < currentQuestions.length - 1) {
@@ -178,6 +199,9 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             elements.resultMessage.textContent = "Keep studying! You can do this.";
         }
+
+        // Final Progress Bar Update
+        updateAnalyticsDisplay();
     }
 
     // Event: Restart
@@ -185,4 +209,87 @@ document.addEventListener('DOMContentLoaded', () => {
         elements.certInput.value = '';
         showScreen('start');
     });
+
+    // --- ANALYTICS LOGIC --- //
+
+    function logActivity() {
+        const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+        let data = JSON.parse(localStorage.getItem('studyActivity')) || {};
+
+        if (!data[today]) data[today] = 0;
+        data[today]++;
+
+        localStorage.setItem('studyActivity', JSON.stringify(data));
+        updateAnalyticsDisplay();
+    }
+
+    function updateAnalyticsDisplay() {
+        // 1. Get Data
+        let data = JSON.parse(localStorage.getItem('studyActivity')) || {};
+
+        // Seed dummy data if empty (for demo purposes)
+        if (Object.keys(data).length === 0) {
+            const today = new Date();
+            for (let i = 4; i >= 0; i--) {
+                const d = new Date(today);
+                d.setDate(d.getDate() - i);
+                const datePostStr = d.toISOString().split('T')[0];
+                data[datePostStr] = Math.floor(Math.random() * 20) + 5; // Random 5-25 questions
+            }
+            localStorage.setItem('studyActivity', JSON.stringify(data));
+        }
+
+        // 2. Prepare Data for Mon-Fri Graph
+        // NOTE: For simplicity, we are showing the LAST 5 Days activity mapped as points
+        const sortedDates = Object.keys(data).sort().slice(-5); // Last 5 days
+        const values = sortedDates.map(d => data[d]);
+
+        // 3. Render SVG Graph
+        renderGraph(values);
+    }
+
+    function renderGraph(values) {
+        const svg = elements.activityGraph;
+        svg.innerHTML = ''; // Clear previous
+
+        if (values.length === 0) return;
+
+        const maxVal = Math.max(...values, 10); // Minimum max of 10 for scale
+        const width = 500;
+        const height = 200;
+        const padding = 20;
+
+        // Calculate Points
+        const points = values.map((val, index) => {
+            const x = (index / (values.length - 1)) * (width - 2 * padding) + padding;
+            // Invert Y because SVG 0 is top
+            const y = height - ((val / maxVal) * (height - 2 * padding)) - padding;
+            return `${x},${y}`;
+        }).join(' ');
+
+        // Draw Line
+        const polyline = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
+        polyline.setAttribute('points', points);
+        polyline.setAttribute('class', 'graph-line');
+        svg.appendChild(polyline);
+
+        // Draw Dots
+        values.forEach((val, index) => {
+            const x = (index / (values.length - 1)) * (width - 2 * padding) + padding;
+            const y = height - ((val / maxVal) * (height - 2 * padding)) - padding;
+
+            const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            circle.setAttribute('cx', x);
+            circle.setAttribute('cy', y);
+            circle.setAttribute('r', 4);
+            circle.setAttribute('class', 'graph-point');
+
+            // Tooltip via title
+            const title = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+            title.textContent = `Questions: ${val}`;
+            circle.appendChild(title);
+
+            svg.appendChild(circle);
+        });
+    }
 });
