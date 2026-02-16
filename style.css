@@ -6,6 +6,7 @@
 }
 
 :root {
+    /* Light Mode Variables */
     --primary-blue: #1976D2;
     --primary-orange: #FF6F00;
     --white: #FFFFFF;
@@ -15,7 +16,17 @@
     --bg-gradient-end: #FF6F00;
     --card-bg: rgba(255, 255, 255, 0.95);
     --font-family: 'Poppins', sans-serif;
-    /* Updated Font */
+    --bg-body: linear-gradient(-45deg, #1976D2, #FF6F00, #2196F3, #FF8F00);
+}
+
+/* Dark Mode Override */
+body.dark-mode {
+    --text-dark: #e0e0e0;
+    --text-light: #b0b0b0;
+    --card-bg: rgba(30, 30, 30, 0.95);
+    --bg-body: linear-gradient(-45deg, #0D47A1, #E65100, #1565C0, #F57C00);
+    --white: #e0e0e0;
+    /* For headers in dark mode */
 }
 
 body {
@@ -26,7 +37,7 @@ body {
     align-items: center;
     color: var(--text-dark);
     /* Animated Gradient Background */
-    background: linear-gradient(-45deg, #1976D2, #FF6F00, #2196F3, #FF8F00);
+    background: var(--bg-body);
     background-size: 400% 400%;
     animation: gradientBG 15s ease infinite;
     padding: 20px 0;
@@ -79,9 +90,8 @@ header p {
     padding: 2.5rem;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(10px);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
     margin-bottom: 20px;
-    /* Spacing between cards */
 }
 
 .hidden {
@@ -114,7 +124,6 @@ header p {
 .shake {
     animation: shake 0.4s ease-in-out;
     border: 2px solid #FF5252;
-    /* Temporary Red Border */
 }
 
 /* Start Screen */
@@ -132,6 +141,13 @@ input {
     font-size: 1rem;
     font-family: inherit;
     transition: border-color 0.3s;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+body.dark-mode input {
+    background: #333;
+    border-color: #555;
+    color: #fff;
 }
 
 input:focus {
@@ -157,7 +173,7 @@ button:hover {
 
 #generate-btn {
     background-color: var(--primary-orange);
-    color: var(--white);
+    color: #fff;
 }
 
 /* Loading State */
@@ -232,25 +248,33 @@ button:hover {
     padding: 15px 20px;
 }
 
+body.dark-mode .option-btn {
+    background: #333;
+    color: #e0e0e0;
+}
+
 .option-btn:hover {
     background: #e3f2fd;
     color: var(--primary-blue);
 }
 
+body.dark-mode .option-btn:hover {
+    background: #444;
+    color: var(--primary-orange);
+}
+
 .option-btn.selected {
     background: var(--primary-blue);
-    color: var(--white);
+    color: #fff;
 }
 
 .option-btn.correct {
     background: #4CAF50;
-    /* Success green */
     color: white;
 }
 
 .option-btn.incorrect {
     background: #FF5252;
-    /* Error red */
     color: white;
 }
 
@@ -289,6 +313,33 @@ button:hover {
 #restart-btn {
     background-color: var(--primary-orange);
     color: white;
+}
+
+/* Dashboard Styles */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.stat-card {
+    padding: 1.5rem;
+    text-align: center;
+    margin-bottom: 0;
+    /* Override default card margin */
+}
+
+.stat-card h3 {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 10px;
+}
+
+.stat-card p {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-blue);
 }
 
 /* Analytics Section */
@@ -359,6 +410,83 @@ button:hover {
     padding: 0 10px;
 }
 
+/* Settings Styles */
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+}
+
+.danger-zone {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.danger-btn {
+    background-color: #FF5252;
+    color: white;
+    width: 100%;
+}
+
+.danger-btn:hover {
+    background-color: #d32f2f;
+}
+
+/* Toggle Switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked+.slider {
+    background-color: var(--primary-blue);
+}
+
+input:checked+.slider:before {
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+
 /* Footer */
 .app-footer {
     text-align: center;
@@ -373,40 +501,28 @@ button:hover {
     color: var(--white);
 }
 
-/* Mobile Responsiveness */
-@media (max-width: 480px) {
-    .card {
-        padding: 1.5rem;
-    }
-
-    header h1 {
-        font-size: 2rem;
-    }
-
-    .score-display {
-        font-size: 3rem;
-    }
-}
-
 /* Navigation */
 .top-nav {
     display: flex;
-    justify-content: flex-end;
-    padding-bottom: 10px;
+    justify-content: center;
+    gap: 10px;
+    padding-bottom: 20px;
+    flex-wrap: wrap;
 }
 
 .nav-link {
     color: var(--white);
     text-decoration: none;
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 0.9rem;
     padding: 8px 16px;
     background: rgba(255, 255, 255, 0.2);
     border-radius: 20px;
     transition: background 0.3s ease;
 }
 
-.nav-link:hover {
+.nav-link:hover,
+.nav-link.active {
     background: rgba(255, 255, 255, 0.4);
 }
 
@@ -445,9 +561,32 @@ button:hover {
     margin-top: 20px;
 }
 
+body.dark-mode .tech-stack {
+    background: #333;
+}
+
 .closing {
     margin-top: 30px;
     text-align: center;
     font-weight: 600;
     color: var(--primary-blue);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 480px) {
+    .card {
+        padding: 1.5rem;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    .score-display {
+        font-size: 3rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
 }

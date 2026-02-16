@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - CertMaster</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts: Poppins & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header>
+            <nav class="top-nav">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="dashboard.html" class="nav-link active">Dashboard</a>
+                <a href="settings.html" class="nav-link">Settings</a>
+                <a href="about.html" class="nav-link">About</a>
+            </nav>
+            <h1>My Dashboard</h1>
+            <p>Track your progress and study habits.</p>
+        </header>
+
+        <!-- Stats Overview -->
+        <main>
+            <div class="stats-grid">
+                <div class="card stat-card">
+                    <h3>Total Quizzes</h3>
+                    <p id="total-quizzes">0</p>
+                </div>
+                <div class="card stat-card">
+                    <h3>Best Score</h3>
+                    <p id="best-score">0%</p>
+                </div>
+                <div class="card stat-card">
+                    <h3>Average Score</h3>
+                    <p id="avg-score">0%</p>
+                </div>
+            </div>
+
+            <!-- Analytics Section (Moved from Home) -->
+            <div class="card analytics-card">
+                <h3>Weekly Activity</h3>
+                <div class="graph-container">
+                    <svg id="activity-graph" viewBox="0 0 500 200" preserveAspectRatio="none">
+                        <!-- Graph injected by JS -->
+                    </svg>
+                    <div class="graph-labels">
+                        <span>Mon</span>
+                        <span>Tue</span>
+                        <span>Wed</span>
+                        <span>Thu</span>
+                        <span>Fri</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p>Made by <strong>Kgaogelo Phooko</strong>, Data Intern</p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
