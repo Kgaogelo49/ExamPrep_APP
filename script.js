@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- PAGE SPECIFIC LOGIC --- //
 
     // 1. DASHBOARD PAGE
-    if (document.getElementById('total-quizzes')) {
+    if (document.getElementById('total-sessions')) {
         updateDashboardStats();
         updateAnalyticsDisplay(); // Graph
     }
@@ -51,23 +51,28 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- HELPER FUNCTIONS --- //
 
     function updateDashboardStats() {
-        const stats = JSON.parse(localStorage.getItem('quizStats')) || { totalQuizzes: 0, bestScore: 0, totalScore: 0 };
+        // Default Stats
+        const stats = JSON.parse(localStorage.getItem('quizStats')) || { totalSessions: 0, totalTime: 0 };
 
-        document.getElementById('total-quizzes').textContent = stats.totalQuizzes;
-        document.getElementById('best-score').textContent = `${stats.bestScore}%`;
+        // 1. Completed Sessions
+        document.getElementById('total-sessions').textContent = stats.totalSessions;
 
-        const avg = stats.totalQuizzes > 0 ? Math.round(stats.totalScore / stats.totalQuizzes) : 0;
-        document.getElementById('avg-score').textContent = `${avg}%`;
+        // 2. Active Users (Mock Data)
+        // Keep static or randomize slightly for effect
+        document.getElementById('active-users').textContent = "1.2k";
+
+        // 3. Total Study Time (Format Minutes to H m)
+        const totalMinutes = Math.floor(stats.totalTime / 60);
+        const hours = Math.floor(totalMinutes / 60);
+        const mins = totalMinutes % 60;
+        document.getElementById('total-time').textContent = `${hours}h ${mins}m`;
     }
 
-    function logQuizResult(scorePercent) {
-        let stats = JSON.parse(localStorage.getItem('quizStats')) || { totalQuizzes: 0, bestScore: 0, totalScore: 0 };
+    function logQuizResult(durationSeconds) {
+        let stats = JSON.parse(localStorage.getItem('quizStats')) || { totalSessions: 0, totalTime: 0 };
 
-        stats.totalQuizzes++;
-        stats.totalScore += scorePercent;
-        if (scorePercent > stats.bestScore) {
-            stats.bestScore = scorePercent;
-        }
+        stats.totalSessions++;
+        stats.totalTime += durationSeconds; // Cumulative seconds
 
         localStorage.setItem('quizStats', JSON.stringify(stats));
     }
@@ -79,6 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let currentQuestionIndex = 0;
         let score = 0;
         let selectedOptionIndex = null;
+        let quizStartTime = null;
 
         // DOM Elements
         const screens = {
@@ -89,6 +95,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const elements = {
             certInput: document.getElementById('cert-input'),
+            questionCountInput: document.getElementById('question-count'),
+            difficultyInput: document.getElementById('difficulty'),
             generateBtn: document.getElementById('generate-btn'),
             loading: document.getElementById('loading'),
             questionTracker: document.getElementById('question-tracker'),
@@ -111,41 +119,43 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Helper: Generate Mock Questions (Simulates AI)
-        function generateMockQuestions(topic) {
+        function generateMockQuestions(topic, count, difficulty) {
+            // Difficulty can tweak templates or logic (Mocking simply adds label for now)
+            const difficultyLabel = difficulty.charAt(0).toUpperCase() + difficulty.slice(1);
+
             // Templates to make questions look relevant to the input topic
             const templates = [
                 {
-                    q: "What is a primary benefit of implementing ${topic} in an enterprise environment?",
+                    q: `[${difficultyLabel}] What is a primary benefit of implementing \${topic} in an enterprise environment?`,
                     options: ["Increased operational complexity", "Scalability and cost-efficiency", "Reduced data security", "Slower deployment times"],
                     correct: 1
                 },
                 {
-                    q: "Which key component is essential for a successful ${topic} strategy?",
+                    q: `[${difficultyLabel}] Which key component is essential for a successful \${topic} strategy?`,
                     options: ["Legacy hardware integration", "Continuous monitoring and automation", "Manual data entry", "Single-point failure architecture"],
                     correct: 1
                 },
                 {
-                    q: "In the context of ${topic}, what does the 'Shared Responsibility Model' primarily address?",
+                    q: `[${difficultyLabel}] In the context of \${topic}, what does the 'Shared Responsibility Model' primarily address?`,
                     options: ["Hardware manufacturing", "Security obligations between provider and user", "Employee payroll management", "Office layout planning"],
                     correct: 1
                 },
                 {
-                    q: "When optimizing for ${topic}, which metric is deemed most critical?",
+                    q: `[${difficultyLabel}] When optimizing for \${topic}, which metric is deemed most critical?`,
                     options: ["Lines of code written", "Latency and throughput", "Server background color", "Number of meetings attended"],
                     correct: 1
                 },
                 {
-                    q: "What is the industry standard protocol often associated with ${topic} integrations?",
+                    q: `[${difficultyLabel}] What is the industry standard protocol often associated with \${topic} integrations?`,
                     options: ["REST/gRPC APIs", "FTP over Telnet", "Physical floppy disks", "Morse code"],
                     correct: 0
                 }
             ];
 
-            // Generate 30 questions by looping through templates
-            const totalQuestions = 30;
+            // Generate N questions by looping through templates
             const questions = [];
 
-            for (let i = 0; i < totalQuestions; i++) {
+            for (let i = 0; i < count; i++) {
                 const t = templates[i % templates.length]; // Cycle through templates
                 questions.push({
                     id: i,
@@ -160,6 +170,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // Event: Start Quiz
         elements.generateBtn.addEventListener('click', () => {
             const topic = elements.certInput.value.trim();
+            const count = parseInt(elements.questionCountInput.value);
+            const difficulty = elements.difficultyInput.value;
+
             if (!topic) {
                 alert('Please enter a certification topic!');
                 return;
@@ -171,7 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Simulate API delay
             setTimeout(() => {
-                currentQuestions = generateMockQuestions(topic);
+                currentQuestions = generateMockQuestions(topic, count, difficulty);
                 startQuiz();
                 elements.generateBtn.classList.remove('hidden');
                 elements.loading.classList.add('hidden');
@@ -181,6 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
         function startQuiz() {
             currentQuestionIndex = 0;
             score = 0;
+            quizStartTime = new Date(); // Start Time Tracker
             showScreen('quiz');
             renderQuestion();
         }
@@ -256,6 +270,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function showResults() {
             showScreen('result');
+
+            // Calculate Duration
+            const endTime = new Date();
+            const durationSeconds = Math.round((endTime - quizStartTime) / 1000);
+
             const percentage = Math.round((score / currentQuestions.length) * 100);
             elements.scoreValue.textContent = percentage;
 
@@ -267,8 +286,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 elements.resultMessage.textContent = "Keep studying! You can do this.";
             }
 
-            // Log Quiz Stats
-            logQuizResult(percentage);
+            // Log Quiz Stats (Duration)
+            logQuizResult(durationSeconds);
         }
 
         // Event: Restart

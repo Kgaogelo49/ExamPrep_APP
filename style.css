@@ -134,7 +134,13 @@ header p {
     margin-top: 20px;
 }
 
-input {
+.config-row {
+    display: flex;
+    gap: 10px;
+}
+
+input,
+select {
     padding: 15px;
     border: 2px solid #e0e0e0;
     border-radius: 10px;
@@ -142,15 +148,18 @@ input {
     font-family: inherit;
     transition: border-color 0.3s;
     background: rgba(255, 255, 255, 0.9);
+    width: 100%;
 }
 
-body.dark-mode input {
+body.dark-mode input,
+body.dark-mode select {
     background: #333;
     border-color: #555;
     color: #fff;
 }
 
-input:focus {
+input:focus,
+select:focus {
     outline: none;
     border-color: var(--primary-blue);
 }
@@ -340,6 +349,51 @@ body.dark-mode .option-btn:hover {
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--primary-blue);
+}
+
+/* Device Stats Bar */
+.device-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.device-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.device-label {
+    width: 60px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.bar-track {
+    flex: 1;
+    height: 12px;
+    background: #eee;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+}
+
+.bar-fill.mobile {
+    background: var(--primary-orange);
+}
+
+.bar-fill.desktop {
+    background: var(--primary-blue);
+}
+
+.device-val {
+    width: 40px;
+    font-size: 0.9rem;
+    text-align: right;
 }
 
 /* Analytics Section */

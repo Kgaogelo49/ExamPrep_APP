@@ -35,6 +35,20 @@
                 <div class="input-group">
                     <input type="text" id="cert-input" placeholder="e.g. AWS Solutions Architect, PMP, CISSP"
                         autocomplete="off">
+
+                    <div class="config-row">
+                        <select id="question-count">
+                            <option value="10">10 Questions</option>
+                            <option value="20">20 Questions</option>
+                            <option value="30" selected>30 Questions</option>
+                        </select>
+                        <select id="difficulty">
+                            <option value="easy">Easy</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="hard">Hard</option>
+                        </select>
+                    </div>
+
                     <button id="generate-btn">Start Quiz</button>
                 </div>
                 <div id="loading" class="hidden">
