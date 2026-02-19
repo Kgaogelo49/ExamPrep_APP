@@ -40,7 +40,127 @@ document.addEventListener('DOMContentLoaded', () => {
         // Templates to make questions look relevant to the input topic
         const templates = [
 {
-q: "A human resources department deploys a generative AI (gen AI) model to screen job applications and provide a shortlist of candidates to recruiters. Recruiters notice that some seemingly qualified candidates are consistently being overlooked, but the AI provides no explanation for its rankings or exclusions. The company needs to address this lack of transparency. What should they do?",
+q: "A growing retail company with fragmented phone, email, and basic website chat support needs a unified cloud solution. They require integrated communication channels, consistent customer experiences, and scalable support that ensures security and privacy. Which Google Cloud offering should they use?",
+options: [
+"Vertex AI Platform",
+"Google Cloud Contact Center as a Service",
+"Conversational AI",
+"Vertex AI Search"
+],
+correct: 1
+},
+{
+q: "An organization is seeking to improve how its employees access and use internal company information scattered across various systems. They want to provide their knowledge workers with tools that can understand and use this data to enhance productivity and decision-making. What is a key benefit of using Gemini Enterprise in this scenario?",
+options: [
+"Gemini Enterprise primarily focuses on enhancing external customer engagement through AI-powered chatbots.",
+"Gemini Enterprise directly manages the underlying infrastructure and hardware required for AI model training.",
+"Gemini Enterprise allows employees to find and use internal information more easily by creating custom AI agents that can access and understand data from various enterprise sources.",
+"Gemini Enterprise is mainly designed for building and deploying custom machine learning models for predictive analytics."
+],
+correct: 2
+},
+{
+q: "What is reinforcement learning?",
+options: [
+"Learning from labeled data with correct output pairs.",
+"Learning by identifying patterns in unlabeled data.",
+"Learning through interaction and feedback.",
+"Learning by training on vast data to generate new content."
+],
+correct: 2
+},
+{
+q: "A company is developing a system to automatically categorize customer support emails. They have a collection of thousands of past emails, and each email has been manually reviewed and tagged with a category such as 'Billing Inquiry,' 'Technical Support,' or 'Feature Request.' What type of data is this?",
+options: [
+"Unlabeled data",
+"Labeled data",
+"Structured data",
+"Raw data"
+],
+correct: 1
+},
+{
+q: "What is the definition of a generative AI (gen AI) model?",
+options: [
+"A physical device that houses the hardware components of a gen AI system.",
+"A complex algorithm trained on vast amounts of data to learn patterns and relationships.",
+"A user interface that allows users to interact with a gen AI system.",
+"A set of rules and guidelines governing responsible development and use of gen AI."
+],
+correct: 1
+},
+{
+q: "A video game company created a virtual reality game with virtual characters that can interact with users in a more natural and intuitive way by using gestures and facial expressions to communicate. What type of agent is this?",
+options: [
+"Creative agent",
+"Workflow agent",
+"Virtual assistant agent",
+"Conversational agent"
+],
+correct: 3
+},
+{
+q: "A software company has developers who need to write, review, debug, and generate code from natural language descriptions by using generative AI. What type of agent is this?",
+options: [
+"Data analysis agent",
+"Workflow agent",
+"Data agent",
+"Code agent"
+],
+correct: 3
+},
+{
+q: "An advertising agency needs to quickly create many different photorealistic images from text descriptions for client campaigns because traditional photoshoots are too slow and costly. The agency's goal is to generate high-quality visuals rapidly from text to improve campaign speed and lower expenses. Which Google foundation model should be used?",
+options: [
+"Gemini",
+"Gemma",
+"Veo",
+"Imagen"
+],
+correct: 3
+},
+{
+q: "A research scientist wants to use Veo to visualize live, fluctuating data streams on a real-time dashboard. Why would Veo be a poor choice for this particular task?",
+options: [
+"Veo generates videos from static inputs like text or images and cannot process or dynamically visualize live data.",
+"Veo may lack specific scientific visualization styles needed for accurate data representation.",
+"Veo use for this scenario would require too many computational resources.",
+"Veo is designed for short-form video, not continuous, long-duration live data displays."
+],
+correct: 0
+},
+{
+q: "A company sells custom-designed phone cases on their website. How should Imagen be effectively used?",
+options: [
+"To generate realistic images of phone cases on devices from text descriptions of designs.",
+"To analyze customer feedback to identify popular phone case design trends.",
+"To predict demand for different phone case designs based on sales data.",
+"To transcribe customer audio feedback on prototypes of phone case designs."
+],
+correct: 0
+},
+{
+q: "A company lacks extensive in-house machine learning and AI expertise. How does Google Cloud democratize AI?",
+options: [
+"By offering exclusive access to its most powerful AI models for high-spending clients.",
+"By providing fully automated AI solutions requiring no technical user input.",
+"By providing a comprehensive AI platform with low-code/no-code tools, pre-trained models, and easy-to-use APIs.",
+"By offering free custom AI solution development and deployment for all businesses."
+],
+correct: 2
+},
+{
+q: "A marketing team is brainstorming creative ideas for a new social media campaign. They want to quickly generate various taglines and initial post drafts to explore different angles and messaging options. They need a Google Cloud prebuilt generative AI tool without additional setup that allows for rapid content creation and experimentation. What should the team do?",
+options: [
+"Use NotebookLM to upload past successful campaigns and analyze their key elements.",
+"Use Google Workspace with Gemini within Google Slides to prepare a presentation outlining their social media campaign strategy.",
+"Use the Gemini app to create taglines and social media post drafts that align with their campaign goals and target audience.",
+"Create a custom Gem in Gemini Advanced with specific brand guidelines and target audience profiles."
+],
+correct: 2
+},
+{
+    q: "A human resources department deploys a generative AI (gen AI) model to screen job applications and provide a shortlist of candidates to recruiters. Recruiters notice that some seemingly qualified candidates are consistently being overlooked, but the AI provides no explanation for its rankings or exclusions. The company needs to address this lack of transparency. What should they do?",
 options: [
 "Collect a larger and more diverse dataset for the gen AI model.",
 "Fine-tune the gen AI model.",
