@@ -39,408 +39,137 @@ document.addEventListener('DOMContentLoaded', () => {
     function generateMockQuestions(topic) {
         // Templates to make questions look relevant to the input topic
         const templates = [
-            {q: "What is the primary purpose of Generative AI in business strategy?",
-options: [
-"To replace all human workers",
-"To generate new content, insights, and automation capabilities",
-"To eliminate cybersecurity risks",
-"To remove the need for data governance"
-],
-correct: 1
-},
 {
-q: "Which of the following is a common risk of Generative AI adoption?",
+q: "A human resources department deploys a generative AI (gen AI) model to screen job applications and provide a shortlist of candidates to recruiters. Recruiters notice that some seemingly qualified candidates are consistently being overlooked, but the AI provides no explanation for its rankings or exclusions. The company needs to address this lack of transparency. What should they do?",
 options: [
-"Model bias and hallucinations",
-"Infinite scalability",
-"Perfect accuracy",
-"Zero operational cost"
-],
-correct: 0
-},
-{
-q: "What is prompt engineering?",
-options: [
-"Designing AI hardware chips",
-"Writing effective inputs to guide AI outputs",
-"Encrypting training data",
-"Managing cloud servers"
-],
-correct: 1
-},
-{
-q: "What does LLM stand for?",
-options: [
-"Large Learning Machine",
-"Layered Logic Model",
-"Large Language Model",
-"Linked Language Mechanism"
+"Collect a larger and more diverse dataset for the gen AI model.",
+"Fine-tune the gen AI model.",
+"Implement explainable gen AI policies.",
+"Develop fairness assessments for the gen AI model."
 ],
 correct: 2
 },
 {
-q: "Why is data governance important in Generative AI?",
+q: "A company is evaluating the use of large language models (LLMs) to enhance its operations and customer interactions. What is a primary characteristic of LLMs?",
 options: [
-"To increase randomness",
-"To ensure compliance, quality, and security",
-"To reduce compute power",
-"To eliminate regulations"
-],
-correct: 1
-},
-{
-q: "What is AI hallucination?",
-options: [
-"When AI refuses to answer",
-"When AI generates incorrect but confident responses",
-"When AI crashes",
-"When AI encrypts data"
-],
-correct: 1
-},
-{
-q: "Which metric is most important when evaluating GenAI ROI?",
-options: [
-"Server color scheme",
-"Productivity improvement and cost savings",
-"Number of meetings",
-"Amount of electricity used"
-],
-correct: 1
-},
-{
-q: "Which technique improves AI response accuracy?",
-options: [
-"Prompt refinement",
-"Ignoring context",
-"Reducing training data",
-"Eliminating oversight"
-],
-correct: 0
-},
-{
-q: "What is fine-tuning?",
-options: [
-"Physically modifying servers",
-"Adjusting a pre-trained model on specific data",
-"Restarting a model",
-"Deleting datasets"
-],
-correct: 1
-},
-{
-q: "Responsible AI primarily focuses on:",
-options: [
-"Maximizing automation only",
-"Ethics, fairness, transparency, and accountability",
-"Removing compliance teams",
-"Increasing compute costs"
-],
-correct: 1
-},
-{
-q: "Which of the following reduces bias in AI systems?",
-options: [
-"Diverse training datasets",
-"Smaller datasets",
-"Ignoring fairness testing",
-"Fewer evaluations"
-],
-correct: 0
-},
-{
-q: "A key leadership role in GenAI transformation is to:",
-options: [
-"Write all prompts manually",
-"Align AI initiatives with business objectives",
-"Eliminate governance",
-"Ignore risk management"
-],
-correct: 1
-},
-{
-q: "Which cloud service model is most used for AI scalability?",
-options: [
-"IaaS",
-"PaaS",
-"SaaS",
-"All of the above"
+"LLMs excel in highly specific technical tasks requiring deep, singular domain expertise.",
+"LLMs learn and generalize effectively from small datasets for niche applications.",
+"LLMs have strong inherent logical reasoning and problem-solving abilities without extra prompting.",
+"LLMs are trained on vast datasets, enabling broad language and context understanding, and adaptability across many tasks."
 ],
 correct: 3
 },
 {
-q: "Token limits in LLMs affect:",
+q: "An AI robot learns optimal package delivery routes in a city. It receives positive scores for fast, successful deliveries and negative scores for delays or failures. Through this feedback, the robot improves its navigation over time. What type of machine learning is being used to train the robot?",
 options: [
-"Response length and context window",
-"Hardware size",
-"Electricity usage only",
-"Company revenue"
+"Supervised learning",
+"Deep learning",
+"Unsupervised learning",
+"Reinforcement learning"
 ],
-correct: 0
+correct: 3
 },
 {
-q: "Retrieval-Augmented Generation (RAG) improves:",
+q: "A company wants to use generative AI (gen AI) to automate complex workflows and improve decision-making across its various departments. They are considering implementing AI agents as a key component of their strategy. What is the primary function of an AI agent in a gen AI system?",
 options: [
-"Bias amplification",
-"Model hallucination",
-"Accuracy using external knowledge sources",
-"Hardware performance"
+"To provide the computing power for training and running advanced AI models.",
+"To be the user interface for interacting with AI models.",
+"To be a smart system that can analyze, use tools, and make decisions to reach goals.",
+"To be a central storage place for the data that AI models use."
 ],
 correct: 2
 },
 {
-q: "What is a model parameter?",
+q: "An advertising agency needs to quickly generate many photorealistic images from text for client campaigns because traditional photoshoots are slow and costly. They want to rapidly create high-quality visuals from text and reduce expenses. Which Google foundation model should they use?",
 options: [
-"A physical cable",
-"A tunable weight inside a neural network",
-"A security patch",
-"A user password"
-],
-correct: 1
-},
-{
-q: "Zero-shot prompting means:",
-options: [
-"Model receives no training",
-"Model answers without examples",
-"Model cannot respond",
-"Model is offline"
-],
-correct: 1
-},
-{
-q: "Few-shot prompting involves:",
-options: [
-"Giving several examples in the prompt",
-"Reducing model size",
-"Deleting training data",
-"Encrypting prompts"
-],
-correct: 0
-},
-{
-q: "Temperature setting in AI controls:",
-options: [
-"Server heat",
-"Response creativity/randomness",
-"Internet speed",
-"Hardware lifespan"
-],
-correct: 1
-},
-{
-q: "A high temperature setting results in:",
-options: [
-"More predictable answers",
-"More creative and varied outputs",
-"System shutdown",
-"Data encryption"
-],
-correct: 1
-},
-
-// Continue pattern to reach 50
-
-{
-q: "Explainability in AI refers to:",
-options: [
-"Understanding how a model makes decisions",
-"Making AI faster",
-"Increasing randomness",
-"Removing documentation"
-],
-correct: 0
-},
-{
-q: "Which role oversees AI compliance?",
-options: [
-"Chief Ethics Officer or AI Governance Lead",
-"Intern",
-"Graphic Designer",
-"Marketing Assistant"
-],
-correct: 0
-},
-{
-q: "Shadow AI refers to:",
-options: [
-"Unauthorized AI usage within an organization",
-"Cybersecurity encryption",
-"Dark web usage",
-"Private servers"
-],
-correct: 0
-},
-{
-q: "Synthetic data is:",
-options: [
-"Fake malicious data",
-"Artificially generated data for training/testing",
-"Deleted datasets",
-"Encrypted storage"
-],
-correct: 1
-},
-{
-q: "A key GenAI leadership competency is:",
-options: [
-"Risk awareness and change management",
-"Ignoring compliance",
-"Eliminating governance",
-"Reducing collaboration"
-],
-correct: 0
-},
-{
-q: "Multimodal AI can process:",
-options: [
-"Only text",
-"Text, images, audio and more",
-"Only spreadsheets",
-"Only code"
-],
-correct: 1
-},
-{
-q: "Overfitting occurs when:",
-options: [
-"Model generalizes well",
-"Model memorizes training data too closely",
-"Model shuts down",
-"Model encrypts output"
-],
-correct: 1
-},
-{
-q: "AI governance frameworks help organizations:",
-options: [
-"Scale risk",
-"Manage risk and compliance",
-"Remove transparency",
-"Reduce documentation"
-],
-correct: 1
-},
-{
-q: "Data privacy regulations impact GenAI by:",
-options: [
-"Requiring responsible data usage",
-"Increasing randomness",
-"Reducing training time",
-"Removing compliance"
-],
-correct: 0
-},
-{
-q: "One strategic GenAI benefit is:",
-options: [
-"Improved innovation cycles",
-"Increased manual processes",
-"Higher error rates",
-"Slower product launches"
-],
-correct: 0
-},
-{
-q: "Foundation models are:",
-options: [
-"Small niche models",
-"Large pre-trained models adaptable to tasks",
-"Hardware tools",
-"Security protocols"
-],
-correct: 1
-},
-{
-q: "Change management in AI adoption ensures:",
-options: [
-"Employee readiness and adoption",
-"Reduced collaboration",
-"Ignored resistance",
-"Data deletion"
-],
-correct: 0
-},
-{
-q: "A sandbox environment is used to:",
-options: [
-"Test AI safely before deployment",
-"Delete production systems",
-"Increase security risks",
-"Remove oversight"
-],
-correct: 0
-},
-{
-q: "Human-in-the-loop systems:",
-options: [
-"Eliminate humans",
-"Include human oversight in AI decisions",
-"Ignore governance",
-"Automate everything"
-],
-correct: 1
-},
-{
-q: "AI model drift refers to:",
-options: [
-"Hardware malfunction",
-"Performance degradation over time",
-"Internet outage",
-"Server overheating"
-],
-correct: 1
-},
-{
-q: "Ethical AI deployment requires:",
-options: [
-"Transparency and fairness audits",
-"Ignoring bias",
-"Reducing monitoring",
-"Avoiding documentation"
-],
-correct: 0
-},
-{
-q: "Strategic AI KPIs include:",
-options: [
-"Productivity gains",
-"Cost savings",
-"Innovation speed",
-"All of the above"
+"Gemini",
+"Gemma",
+"Veo",
+"Imagen"
 ],
 correct: 3
 },
 {
-q: "Cross-functional AI teams typically include:",
+q: "A company is planning to integrate generative AI into its operations but is wary of becoming dependent on a single technology provider. They prioritize the ability to choose and integrate different AI tools and platforms as their needs evolve. Which inherent characteristic of Google Cloud would address this concern?",
 options: [
-"Only engineers",
-"Business, legal, IT, and compliance roles",
-"Only marketing",
-"No leadership"
-],
-correct: 1
-},
-{
-q: "AI scalability depends on:",
-options: [
-"Cloud infrastructure",
-"Manual paperwork",
-"Reduced governance",
-"Office size"
+"Google Cloud's emphasis on an open approach within its AI offerings.",
+"Google Cloud's commitment to tightly integrated, proprietary AI solutions",
+"Google Cloud's strategy prioritizing fully managed AI services that simplify the user experience",
+"Google Cloud's primary focus on automating AI workflows"
 ],
 correct: 0
 },
 {
-q: "The biggest GenAI leadership mistake is:",
+q: "A consulting research team needs to analyze multiple lengthy reports and documents to find key trends and make client recommendations. They require a method to quickly understand each document's core findings, link information across sources, and efficiently organize insights for their report. Manual methods are too slow and complex. Which Google Cloud offering should they use?",
 options: [
-"Starting with strategy",
-"Deploying without governance",
-"Investing in training",
-"Aligning with goals"
+"NotebookLM",
+"Gemini app",
+"Vertex AI Search",
+"Google Workspace with Gemini"
+],
+correct: 0
+},
+{
+q: "A grocery store chain has data in several internal systems like sales, inventory, and marketing. Employees waste time searching these systems for information on product performance, stock, and campaign effectiveness. They need a central way to easily access and understand data across these systems for better decisions and efficiency. Which Google Cloud offering should they use?",
+options: [
+"Google Workspace with Gemini",
+"Gemini Enterprise",
+"Vertex AI Search",
+"Conversational Agents"
 ],
 correct: 1
+},
+{
+q: "A tech company has separate teams using different tools for their machine learning projects, causing duplicated work and scaling issues. They need a central platform to manage all their AI development, deployment, and monitoring efficiently. Which Google Cloud offering should they use?",
+options: [
+"Cloud Functions",
+"Vertex AI",
+"Gemini Enterprise",
+"BigQuery"
+],
+correct: 1
+},
+{
+q: "A software company's AI chatbot struggles to answer customer questions about recently released features because this information is not in its original training data. Customers are getting inaccurate answers, increasing support agent workload. The company wants the chatbot to use the latest product documentation to give accurate, up-to-date responses without retraining the entire model. Which technique should they use?",
+options: [
+"Fine-tuning",
+"Prompt engineering",
+"Retrieval-augmented generation (RAG)",
+"Human-in-the-loop (HITL)"
+],
+correct: 2
+},
+{
+q: "A business analyst asks a generative AI model about the quarterly revenue of a small startup that recently entered the market. The model confidently provides a specific revenue figure and even mentions a supposed press release detailing the company's success. However, after further investigation, the analyst discovers that the startup has not yet released any financial reports, and no such press release exists. The information provided by the AI model is entirely fabricated despite sounding plausible. Which type of large language model limitation does this exemplify?",
+options: [
+"Bias",
+"Knowledge cutoff",
+"Data dependency",
+"Hallucinations"
+],
+correct: 3
+},
+{
+q: "A generative AI tool that answers employee policy questions is providing outdated and inaccurate information, causing confusion. The company wants the tool to give reliable answers based on the latest official documents. What should the organization do?",
+options: [
+"Fine-tune the underlying language model with a broader dataset of general knowledge.",
+"Increase the temperature setting of the language model.",
+"Implement grounding techniques.",
+"Reduce the token count parameter."
+],
+correct: 2
+},
+{
+q: "A sales team wants to create dynamic and personalized video pitches for potential clients. They receive client information in various formats and need an AI model that can transform this information into engaging video content tailored to each client's specific needs and challenges. Which Google model should they use?",
+options: [
+"Gemma",
+"Gemini",
+"Imagen",
+"Veo"
+],
+correct: 3
 }
+
         ];
 
         // Generate 5 questions (duplicating templates if needed for demo)
